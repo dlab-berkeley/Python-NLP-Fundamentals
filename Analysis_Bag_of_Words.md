@@ -196,7 +196,7 @@ tfidf.idxmax()
 ~~~
 aa            	10077
 aadv           	9285
-aadvantage     9974
+aadvantage      9974
 aal           	10630
 abandon        	7859
              	 ...  

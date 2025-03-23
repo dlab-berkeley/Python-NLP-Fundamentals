@@ -137,8 +137,8 @@ neg.plot(kind='barh',
 
 🔔 Question: How would you interpret these results? Share your thoughts in the chat!
 
-
-
+***
+***
 # Análisis de texto en Python: Bolsa de palabras
 ## Frecuencia de términos - Frecuencia inversa de documentos
 Hasta ahora, nos basamos en la frecuencia de palabras para obtener información sobre un documento. Esto supone que si una palabra aparece con más frecuencia en un documento, es más informativa. Sin embargo, esto no siempre es así. Por ejemplo, ya hemos eliminado las palabras vacías porque no son informativas, a pesar de que aparecen muchas veces en un documento. También sabemos que la palabra "vuelo" es una de las más frecuentes, pero no es tan informativa, ya que aparece en muchos documentos. Dado que estamos analizando tweets de aerolíneas, no debería sorprendernos ver la palabra "vuelo".

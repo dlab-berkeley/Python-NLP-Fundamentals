@@ -11,6 +11,7 @@ Python Machine Learning Fundamentals prior to this workshop.
 Check D-Lab's [Learning Pathways](https://dlab-berkeley.github.io/dlab-workshops/python_path.html) to figure out which of our workshops to take!
 
 ## Workshop Goals
+## Objetivos del Taller
 
 This 3-part workshop will prepare participants to move forward with research that uses text
 analysis, with a special focus on social science applications. We explore

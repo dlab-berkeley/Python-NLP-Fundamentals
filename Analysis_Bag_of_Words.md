@@ -10,10 +10,10 @@ In essence, the tf-idf score of a word in a document is the product of two compo
 
 We can also create a *tf-idf* DTM using *sklearn*. We'll use a *TfidfVectorizer* this time:
 
-~~~
+~~~javascript
 from sklearn.feature_extraction.text import TfidfVectorizer
 ~~~
-~~~
+~~~javascript
 # Create a tfidf vectorizer
 vectorizer = TfidfVectorizer(lowercase=True,
 …………………………………..stop_words='english'
@@ -21,7 +21,7 @@ vectorizer = TfidfVectorizer(lowercase=True,
 …………………………………..max_df=0.95,
 …………………………………..max_features=None)
 ~~~
-~~~	
+~~~javascript	
 # Fit and transform 
 tf_dtm = vectorizer.fit_transform(tweets['text_lemmatized'])
 tf_dtm
@@ -30,14 +30,14 @@ tf_dtm
 * <Compressed Sparse Row sparse matrix of dtype 'float64'
   - with 87904 stored elements and shape (11541, 3571)>
 
-~~~
+~~~javascript
 # Create a tf-idf dataframe
 tfidf = pd.DataFrame(tf_dtm.todense(),
 ……………………………columns=vectorizer.get_feature_names_out(),
 ……………………………index=tweets.index)
 tfidf.head()
 ~~~
-~~~
+~~~javascript
 aa	aadv	aadvantage	aal	abandon	abc	ability	able	aboard	abq	...	yummy	yup	yvonne	yvr	yyj	yyz	zero	zone	zoom	zurich
 0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	...	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
 1	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	...	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
@@ -53,11 +53,11 @@ You may have noticed that the vocabulary size is the same as we saw in Challenge
 
 Let's take a look the document where a term has the highest *tf-idf* values. We'll use the *.idxmax()* method to find the index.
 
-~~~
+~~~javascript
 # Retrieve the index of the document
 tfidf.idxmax()
 ~~~
-~~~
+~~~javascript
 aa            	10077
 aadv           	9285
 aadvantage     	9974
@@ -73,21 +73,21 @@ Length: 3571, dtype: int64
 ~~~
 
 For example, the term "worst" occurs most distinctively in the 918th tweet.
-~~~
+~~~javascript
 tfidf.idxmax()['worst']
 np.int64(918)
 ~~~
 Recall that this is the tweet where the word "worst" appears six times!
-~~~
+~~~javascript
 tweets['text_processed'].iloc[918]
 "USER is the worst. worst reservation policies. worst costumer service. worst worst worst. congrats, USER you're not that bad!"
 ~~~
 How about "cancel"? Let's take a look at another example.
-~~~
+~~~javascript
 tfidf.idxmax()['cancel']
 np.int64(5945)
 ~~~
-~~~
+~~~javascript
 tweets['text_processed'].iloc[5945]
 'USER cancelled flighted 😢'
 ~~~
@@ -108,17 +108,17 @@ We've provided the following starter code to guide you:
 
 Next, run pos.plot and neg.plot to plot the words with the highest mean *tf-idf* scores for each subset. 
 
-~~~
+~~~javascript
 # Complete the boolean masks 
 positive_index = tweets[tweets['airline_sentiment'] == 'positive'].index
 negative_index = tweets[tweets['airline_sentiment'] == 'negative'].index
 ~~~
-~~~
+~~~javascript
 # Complete the following two lines
 pos = tfidf.loc[positive_index].mean().sort_values(ascending=False).head(10)
 neg = tfidf.loc[negative_index].mean().sort_values(ascending=False).head(10)
 ~~~
-~~~
+~~~javascript
 pos.plot(kind='barh', 
 ………….xlim=(0, 0.18),
 ………….color='cornflowerblue',
@@ -127,7 +127,7 @@ pos.plot(kind='barh',
 
 ![Reto2 2](https://github.com/user-attachments/assets/a8ce6b0a-4480-4ec6-95a3-f757eafadd70)
 
-~~~ 
+~~~javascript 
 neg.plot(kind='barh', 
 .………….xlim=(0, 0.18),
 .………….color='darksalmon',
@@ -150,10 +150,10 @@ Para solucionar esto, utilizamos un esquema de ponderación llamado *tf-idf* (t�
 En esencia, la puntuación *tf-idf* de una palabra en un documento es el producto de dos componentes: la frecuencia de término *(tf)* y la frecuencia inversa de documento *(idf)*. La *idf* actúa como un factor de escala. Si una palabra aparece en todos los documentos, la *idf* es igual a 1. No se produce escala. Sin embargo, la *idf* suele ser mayor que 1, que es el peso que asignamos a la palabra para aumentar la puntuación *tf-idf* y destacar su carácter informativo. En la práctica, sumamos 1 tanto al denominador como al numerador (add-1 smooth) para evitar problemas con cero ocurrencias.
 
 También podemos crear un DTM *tf-idf* usando sklearn. En esta ocasión, usaremos *TfidfVectorizer*:
-~~~
+~~~javascript
 from sklearn.feature_extraction.text import TfidfVectorizer
 ~~~
-~~~
+~~~javascript
 # Create a tfidf vectorizer
 vectorizer = TfidfVectorizer(lowercase=True,
 …………………………………..stop_words='english'
@@ -161,21 +161,21 @@ vectorizer = TfidfVectorizer(lowercase=True,
 …………………………………..max_df=0.95,
 …………………………………..max_features=None)
 ~~~
-~~~	
+~~~javascript	
 # Fit and transform 
 tf_dtm = vectorizer.fit_transform(tweets['text_lemmatized'])
 tf_dtm
 ~~~
 * <Compressed Sparse Row sparse matrix of dtype 'float64'
 	- with 87904 stored elements and shape (11541, 3571)>
-~~~
+~~~javascript
 # Create a tf-idf dataframe
 tfidf = pd.DataFrame(tf_dtm.todense(),
 ……………………………columns=vectorizer.get_feature_names_out(),
 ……………………………index=tweets.index)
 tfidf.head()
 ~~~
-~~~
+~~~javascript
 aa	aadv	aadvantage	aal	abandon	abc	ability	able	aboard	abq	...	yummy	yup	yvonne	yvr	yyj	yyz	zero	zone	zoom	zurich
 0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	...	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
 1	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	...	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0
@@ -189,11 +189,11 @@ Quizás hayas notado que el tamaño del vocabulario es el mismo que vimos en el 
 # Interpretar valores de TF-IDF
 
 Analicemos el documento donde un término tiene los valores de *tf-idf* más altos. Usaremos el método *.idxmax()* para encontrar el índice.
-~~~
+~~~javascript
 # Retrieve the index of the document
 tfidf.idxmax()
 ~~~
-~~~
+~~~javascript
 aa            	10077
 aadv           	9285
 aadvantage      9974
@@ -208,21 +208,21 @@ zurich        	10622
 Length: 3571, dtype: int64
 ~~~
 Por ejemplo, el término "peor" aparece de forma más clara en el tweet número 918th.
-~~~
+~~~javascript
 tfidf.idxmax()['worst']
 np.int64(918)
 ~~~
 ¡Recordemos que este es el tweet donde la palabra “peor” aparece seis veces!
-~~~
+~~~javascript
 tweets['text_processed'].iloc[918]
 "USER is the worst. worst reservation policies. worst costumer service. worst worst worst. congrats, USER you're not that bad!"
 ~~~
 ¿Qué tal "Cancelar"? Veamos otro ejemplo.
-~~~
+~~~javascript
 tfidf.idxmax()['cancel']
 np.int64(5945)
 ~~~
-~~~
+~~~javascript
 tweets['text_processed'].iloc[5945]
 'USER cancelled flighted 😢'
 ~~~
@@ -238,24 +238,24 @@ Hemos proporcionado el siguiente código de inicio como guía:
 	- Obtenga los 10 términos principales con .head()
 A continuación, ejecute *pos.plot* y *neg.plot* para representar gráficamente las palabras con las puntuaciones medias *tf-idf* más altas para cada subconjunto.
 
-~~~
+~~~javascript
 # Complete the boolean masks 
 positive_index = tweets[tweets['airline_sentiment'] == 'positive'].index
 negative_index = tweets[tweets['airline_sentiment'] == 'negative'].index
 ~~~
-~~~
+~~~javascript
 # Complete the following two lines
 pos = tfidf.loc[positive_index].mean().sort_values(ascending=False).head(10)
 neg = tfidf.loc[negative_index].mean().sort_values(ascending=False).head(10)
 ~~~
-~~~
+~~~javascript
 pos.plot(kind='barh', 
 ………….xlim=(0, 0.18),
 ………….color='cornflowerblue',
 ………….title='Top 10 terms with the highest mean tf-idf values for positive tweets');
 ~~~
 ![Reto2 2](https://github.com/user-attachments/assets/a8ce6b0a-4480-4ec6-95a3-f757eafadd70)
-~~~
+~~~javascript
 neg.plot(kind='barh', 
 .………….xlim=(0, 0.18),
 .………….color='darksalmon',

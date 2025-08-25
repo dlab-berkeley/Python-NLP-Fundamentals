@@ -9,8 +9,8 @@ taller.
 
 ## Prerequisitos
 
-Recomendamos asistir a Fundamentos de Python, Organización de datos de Python y
-Fundamentos de Python Machine Learning antes de este taller.
+* Recomendamos asistir a Fundamentos de Python, Organización de datos de Python y
+* Fundamentos de Python Machine Learning antes de este taller.
 
 Consulte el [Catálogo de talleres] (https://dlab-berkeley.github.io/dlab-workshops/) de D-Lab para explorar todos los talleres, ver lo que se está ejecutando ahora y revisar los requisitos previos.
 
